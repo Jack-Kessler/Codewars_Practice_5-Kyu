@@ -1,0 +1,15 @@
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\bin\Debug\net6.0\CodeWars_Problems_5Kyu.exe
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\bin\Debug\net6.0\CodeWars_Problems_5Kyu.deps.json
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\bin\Debug\net6.0\CodeWars_Problems_5Kyu.runtimeconfig.json
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\bin\Debug\net6.0\CodeWars_Problems_5Kyu.dll
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\bin\Debug\net6.0\CodeWars_Problems_5Kyu.pdb
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\CodeWars_Problems_5Kyu.csproj.AssemblyReference.cache
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\CodeWars_Problems_5Kyu.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\CodeWars_Problems_5Kyu.AssemblyInfoInputs.cache
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\CodeWars_Problems_5Kyu.AssemblyInfo.cs
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\CodeWars_Problems_5Kyu.csproj.CoreCompileInputs.cache
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\CodeWars_Problems_5Kyu.dll
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\refint\CodeWars_Problems_5Kyu.dll
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\CodeWars_Problems_5Kyu.pdb
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\CodeWars_Problems_5Kyu.genruntimeconfig.cache
+C:\Users\jack_\OneDrive\Desktop\Repos\CodeWars_Problems\5-Kyu\CodeWars_Problems_5Kyu\CodeWars_Problems_5Kyu\obj\Debug\net6.0\ref\CodeWars_Problems_5Kyu.dll
