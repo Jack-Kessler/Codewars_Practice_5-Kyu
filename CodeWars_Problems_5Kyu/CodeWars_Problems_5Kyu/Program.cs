@@ -1,469 +1,203 @@
 ﻿// Flotsam (5-Kyu) (Completed 2/5/2023 - 14th day since start of bootcamp)
 
-using System.Runtime.Intrinsics.X86;
+//using System.Runtime.Intrinsics.X86;
+//using NUnit.Framework;
+//using System;
+//using System.Linq;
 
-char[][] image =
-    {
-        new char[] {' ',' ', ' ',' ',' ',' ',' ',' ',' ','|','-','|',' ','|','-','|',' ','|','-','|',' ',' ',' ',' ',' ',' ',' ',' '},
-        new char[] {' ',' ', ' ',' ',' ',' ',' ',' ',' ','|',' ','|',' ','|',' ','|',' ','|',' ','|',' ',' ',' ',' ',' ',' ',' ',' '},
-        new char[] {'~','\\','-','-','-','-','-','-','-','|','-','|','-','|','-','|','-','|','-','|','-','-','-','-','-','-','/','~'},
-        new char[] {'~','~','\\',' ',' ',' ','F',' ',' ',' ','│',' ',' ',' ','S',' ',' ',' ','│',' ',' ',' ','T',' ',' ','/','~','~'},
-        new char[] {'~','~','~','\\','-','-','-','-','-','-','-','-','-','-','-','-','-','-','x','-','-','-','-','-','/','~','~','~'},
-        new char[] {'~','~','~' ,'~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~'}
-      };
+//char[][] image =
+//    {
+//        new char[] {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','|','=','=','|',' ',' ','|','=','=','|',' ',' ','|','=','=','|',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+//        new char[] {' ',' ',' ',' ',' ',' ',' ',' ','_','_','|','_','_','|','_','_','|','_','_','|','_','_','|','_','_','|','_',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+//        new char[] {' ',' ',' ',' ',' ','_','_','|','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','|','_','_','_',' ',' ',' ',' ',' '},
+//        new char[] {' ',' ','_','_','|','_','_','[',']','_','_','[',']','_','_','[',']','_','_','[',']','_','_','[',']','_','_','[',']','_','_','|','_','x','x','x'},
+//        new char[] {'~','|',' ',' ',' ','F',' ',' ','x',' ',' ','S',' ',' ',' ',' ','x',' ',' ','T',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','/','~'},
+//        new char[] {'~','|','_','_','_','_','_','_','|','_','_','_','_','_','_','_','|','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','/','~','~'},
+//        new char[] {'~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~'}
+//      };
 
-int i = 0;
-int j = 0;
+//int i = 0;
+//int j = 0;
 
-int f1 = 0;
-int f2 = 0;
+//int f1 = 0;
+//int f2 = 0;
 
-int s1 = 0;
-int s2 = 0;
+//int s1 = 0;
+//int s2 = 0;
 
-int t1 = 0;
-int t2 = 0;
+//int t1 = 0;
+//int t2 = 0;
 
-int[] xCoordHitArray = { 0 };
-int[] yCoordHitArray = { 0 };
+//int[] xCoordHitArray = { 0 };
+//int[] yCoordHitArray = { 0 };
 
-//int[] xCoordHitTop = { 0 };
-//int[] yCoordHitTop = { 0 };
+//bool hitExists = false;
 
-//int[] xCoordHitBottom = { 0 };
-//int[] yCoordHitBottom = { 0 };
+//string survivors = "";
 
-//int[] xCoordHitRight = { 0 };
-//int[] yCoordHitRight = { 0 };
+//int seaLevel = 0;
 
-//int[] xCoordHitLeft = { 0 };
-//int[] yCoordHitLeft = { 0 };
-
-bool hitExists = false;
-
-string survivors = "";
-//int xHitCounter = 0;
-//bool breakLoop = false;
-
-int seaLevel = 0;
-
-for (int q = 0; q < image.Length; q++) //check for sea level
-{
-    if (image[q][0] == '~')
-    {
-        seaLevel = q;
-        break;
-    }
-
-}
-
-for (i = 0; i < image.Length; i++)
-{
-    for (j = 0; j < image[i].Length; j++)
-    {
-        if (image[i][j] == 'F') //find coordinates of Frank
-        {
-            f1 = i;
-            f2 = j;
-        }
-        else if (image[i][j] == 'S') //Find coordniates of Sam
-        {
-            s1 = i;
-            s2 = j;
-        }
-        else if (image[i][j] == 'T') //Find coordinates of Tom
-        {
-            t1 = i;
-            t2 = j;
-        }
-        else if (image[i][j] == 'x') //Find coordinates of each hit
-        {
-             if (i < seaLevel) //Sea level case. Hit is voided.
-            {
-                image[i][j] = 'D';
-            }
-            else if (image[i + 1][j] != '~' && image[i - 1][j] != '~' && image[i][j + 1] != '~' && image[i][j - 1] != '~')
-                //Voiding hits that do not touch water (as per instructions)
-            {
-                image[i][j] = ' ';
-            }
-            else if (image[i + 1][j] == '~' || image[i - 1][j] == '~'|| image[i][j + 1] == '~' || image[i][j - 1] == '~' )
-            {
-                yCoordHitArray = yCoordHitArray.Append(i).ToArray(); //adds y coordinate of hit touching water
-                xCoordHitArray = xCoordHitArray.Append(j).ToArray(); //adds x coordinate of hit touching water
-                hitExists = true;
-            }
-            ////Finding coordinates of hits touching water on the top (i.e. Submarine case. Water would come down)
-            //{
-            //    yCoordHitTop = yCoordHitTop.Append(i).ToArray(); //tells us which row we are looking at (y-axis)
-                
-            //    //LINQ Append() Method: https://code-maze.com/add-values-to-csharp-array/
-
-            //    xCoordHitTop = xCoordHitTop.Append(j).ToArray(); //tells us which column (position within a subarray) we are looking at (x axis)
-            //    hitExists = true;
-            //    xHitCounter++;
-            //    //code above puts all hit coordinates touching water above in two arrarys.
-            //    //One for x coordinates (column) and one for y coordinates (row).
-            //}
-            //else if (image[i - 1][j] == '~')
-            ////Finding coordinates of hits touching water below.
-            //{
-            //    yCoordHitBottom = yCoordHitBottom.Append(i).ToArray(); //tells us which row we are looking at (y-axis)
-
-            //    //LINQ Append() Method: https://code-maze.com/add-values-to-csharp-array/
-
-            //    xCoordHitBottom = xCoordHitBottom.Append(j).ToArray(); //tells us which column (position within a subarray) we are looking at (x axis)
-            //    hitExists = true;
-            //    xHitCounter++;
-            //    //code above puts all hit coordinates touching water below in two arrarys.
-            //    //One for x coordinates (column) and one for y coordinates (row).
-            //}
-            //else if (image[i][j + 1] == '~')
-            ////Finding coordinates of hits touching water to the right.
-            //{
-            //    yCoordHitRight = yCoordHitRight.Append(i).ToArray(); //tells us which row we are looking at (y-axis)
-
-            //    //LINQ Append() Method: https://code-maze.com/add-values-to-csharp-array/
-
-            //    xCoordHitRight = xCoordHitRight.Append(j).ToArray(); //tells us which column (position within a subarray) we are looking at (x axis)
-            //    hitExists = true;
-            //    xHitCounter++;
-            //    //code above puts all hit coordinates touching water to the right in two arrarys.
-            //    //One for x coordinates (column) and one for y coordinates (row).
-            //}
-            //else if (image[i][j - 1] == '~')
-            ////Finding coordinates of hits touching water to the left.
-            //{
-            //    yCoordHitLeft = yCoordHitLeft.Append(i).ToArray(); //tells us which row we are looking at (y-axis)
-
-            //    //LINQ Append() Method: https://code-maze.com/add-values-to-csharp-array/
-
-            //    xCoordHitLeft = xCoordHitLeft.Append(j).ToArray(); //tells us which column (position within a subarray) we are looking at (x axis)
-            //    hitExists = true;
-            //    xHitCounter++;
-            //    //code above puts all hit coordinates touching water to the left in two arrarys.
-            //    //One for x coordinates (column) and one for y coordinates (row).
-            //}
-        }
-    }
-
-}
-
-xCoordHitArray = xCoordHitArray.Skip(1).ToArray(); //removes initial 0 entry at index 0.
-yCoordHitArray = yCoordHitArray.Skip(1).ToArray(); //removes initial 0 entry at index 0.
-
-//Console.WriteLine(yCoordHitArray.Length);
-//Console.WriteLine(xCoordHitArray.Length);
-
-//for (i=0;i<=xCoordHitArray.Length;i++)
+//for (int q = 0; q < image.Length; q++) //check for sea level
 //{
-//    Console.WriteLine(yCoordHitArray[i]);
-//    Console.WriteLine(xCoordHitArray[i]);
+//    if (image[q][0] == '~')
+//    {
+//        seaLevel = q;
+//        break;
+//    }
+
 //}
 
-i = 0; //reset counter i to zero for loop below
-j = 0; //reset counter j to zero for loop below
-
-image[f1][f2] = ' ';
-image[s1][s2] = ' ';
-image[t1][t2] = ' ';
-
-
-if (hitExists == false)
-{
-    survivors = "";
-}
-else
-{
-    for (i = 0; i < xCoordHitArray.Length; i++)
-    {
-        //Check if coordinate below hit is blank space
-        if (image[yCoordHitArray[i] + 1][xCoordHitArray[j]] == ' ')
-        {
-            image[yCoordHitArray[i] + 1][xCoordHitArray[j]] = '~';
-            yCoordHitArray = yCoordHitArray.Append(yCoordHitArray[i] + 1).ToArray();
-            xCoordHitArray = xCoordHitArray.Append(xCoordHitArray[j]).ToArray();
-            i--;
-        }
-        //check if coordinate above hit is blank space
-        else if (image[yCoordHitArray[i] - 1][xCoordHitArray[j]] == ' ')
-        {
-            image[yCoordHitArray[i] - 1][xCoordHitArray[j]] = '~';
-            yCoordHitArray = yCoordHitArray.Append(yCoordHitArray[i] - 1).ToArray();
-            xCoordHitArray = xCoordHitArray.Append(xCoordHitArray[j]).ToArray();
-            i--;
-        }
-        //check if coordinate to the right of the hit is blank space
-        else if (image[yCoordHitArray[i]][xCoordHitArray[j] + 1] == ' ')
-        {
-            image[yCoordHitArray[i]][xCoordHitArray[j] + 1] = '~';
-            yCoordHitArray = yCoordHitArray.Append(yCoordHitArray[i]).ToArray();
-            xCoordHitArray = xCoordHitArray.Append(xCoordHitArray[j] + 1).ToArray();
-            i--;
-        }
-        //check if coordinate to the left of the hit is blank space
-        else if (image[yCoordHitArray[i]][xCoordHitArray[j] - 1] == ' ')
-        {
-            image[yCoordHitArray[i]][xCoordHitArray[j] - 1] = '~';
-            yCoordHitArray = yCoordHitArray.Append(yCoordHitArray[i]).ToArray();
-            xCoordHitArray = xCoordHitArray.Append(xCoordHitArray[j] - 1).ToArray();
-            i--;
-        }
-        else
-        {
-            j++;
-            //for (int w=0 ; w < xCoordHitArray.Length; w++)
-            //{
-            //    Console.WriteLine(yCoordHitArray[w]);
-            //    Console.WriteLine(xCoordHitArray[w]);
-            //}
-        }
-    }
-}
-
-// At this point, we have filled out all areas where water can leak in from hits that were originally touching water
-
-bool frankSurvived = true;
-bool samSurvived = true;
-bool tomSurvived = true;
-
-for (i = 0; i < yCoordHitArray.Length; i++)
-{
-    if (f1 == yCoordHitArray[i] && f2 == xCoordHitArray[i]) //check if location of Frank was now under water
-    {
-        frankSurvived = false; ;
-    }
-    else if (s1 == yCoordHitArray[i] && s2 == xCoordHitArray[i]) //check if location of Sam was now under water
-    {
-        samSurvived = false;
-    }
-    else if (t1 == yCoordHitArray[i] && t2 == xCoordHitArray[i]) //check if location of Tom was now under water
-    {
-        tomSurvived = false;
-    }
-
-}
-
-if (frankSurvived == true)
-{
-    survivors += "Frank ";
-}
-if (samSurvived == true)
-{
-    survivors += "Sam ";
-}
-if (tomSurvived == true)
-{
-    survivors += "Tom";
-}
-
-Console.WriteLine(survivors);
-
-
-
-//*****************************************************************************************************************************
-//xCoordHitTop = xCoordHitTop.Skip(1).ToArray(); //remove initial 0 entry at index 0. Note: last index now becomes 0. 
-//yCoordHitTop = yCoordHitTop.Skip(1).ToArray(); //remove initial 0 entry at index 0. Note: last index now becomes 0.
-
-//xCoordHitBottom = xCoordHitBottom.Skip(1).ToArray();
-//yCoordHitBottom = yCoordHitBottom.Skip(1).ToArray() ;
-
-//xCoordHitRight = xCoordHitRight.Skip(1).ToArray();
-//yCoordHitRight = yCoordHitRight.Skip(1).ToArray();
-
-//xCoordHitLeft = xCoordHitLeft.Skip(1).ToArray();
-//yCoordHitLeft = yCoordHitLeft.Skip(1).ToArray();
-
-//int k = 1;
-
-//Need to make Frank, Sam, and Tom spaces blank so the code below works.
-
-//else
-//{   
-//        for (i = 0; i < yCoordHitTop.Length; i++)
-//        // First, stretch hits starting at the top in the downward direction (i.e. case of submarine)
-//        // +k because of inversion. remember, bottom of array = largest index
-//        {
-//            if (image[yCoordHitTop[i] + k][xCoordHitTop[i]] == ' ') //looking at index k spaces beneath original hit
-//            {
-//                image[yCoordHitTop[i] + k][xCoordHitTop[i]] = 'x';
-//                i = -1;
-//                k++;
-//            }
-//            else
-//            {
-//                k = 1;
-//            }
-//        }
-
-//        for (i = 0; i < yCoordHitBottom.Length; i++)
-//        // Next, stretch hits starting at the bottom in the upward direction
-//        {
-//            if (image[yCoordHitBottom[i] - k][xCoordHitBottom[i]] == ' ') //looking at index k spaces above original hit
-//            {
-//                image[yCoordHitBottom[i] - k][xCoordHitBottom[i]] = 'x';
-//                i = -1;
-//                k++;
-//            }
-//            else
-//            {
-//                k = 1;
-//            }
-//        }
-
-//        for (i = 0; i < xCoordHitLeft.Length; i++)
-//        // Next, stretch hits starting at the left to the right
-//        {
-//            if (image[yCoordHitLeft[i]][xCoordHitLeft[j] + k] == ' ') //looking at index k spaces to the right of original hit
-//        {
-//                image[yCoordHitLeft[i]][xCoordHitLeft[j] + k] = 'x';
-//                i = -1;
-//                k++;
-//            }
-//            else
-//            {
-//                k = 1;
-//            }
-//        }
-
-//        for (i = 0; i < xCoordHitRight.Length; i++)
-//        // Next, stretch hits starting at the right to the left
-//        {
-//            if (image[yCoordHitRight[i]][xCoordHitRight[j] - k] == ' ') //looking at index k spaces to the left of original hit
-//        {
-//                image[yCoordHitRight[i]][xCoordHitRight[j] - k] = 'x';
-//                i = -1;
-//                k++;
-//            }
-//            else
-//            {
-//                k = 1;
-//            }
-//        }
-
-//    // To this point, we have identified the coordinates of Frank, Sam, and Tom...
-//    // and we have identified at stretched hits that initially touched water.
-//    // Now, we have to see if water (coming through the hits) will ever reach Frank, Sam, or Tom.
-
-//    //Frank         **Still need to exclude if they run into eachother
-
-//    int[] tempFrankY = { f1 };
-//    int[] tempFrankX = { f2 };
-
-
-//    //yCoordHitTop = yCoordHitTop.Append(i).ToArray(); //tells us which row we are looking at (y-axis)
-//    //CoordHitTop = xCoordHitTop.Append(j).ToArray(); //tells us which column (position within a subarray) we are looking at (x axis)
-
-//    image[s1][s2] = ' '; //temporarily making Sam location space. Will fix back later.
-//    image[t1][t2] = ' '; //temporarily making Tom location space. Will fix back later.
-
-//    k = 1;
-
-//    for (i = 0; i < tempFrankX.Length; i++)
-//    {
-//        if (tempFrankX[i] + k < image[f1].Length && image[tempFrankY[i]][tempFrankX[i]+k] == ' ') 
-//           //making sure array is in-bounds and replacing space to right of Frank with 'F'
-//        {
-//            image[tempFrankY[i]][tempFrankX[i] + k] = 'F';
-//            tempFrankY = tempFrankY.Append(f1).ToArray(); //recording new Y coordinate that must be re-evaluated for spaces next to
-//            tempFrankX = tempFrankX.Append(f2 + k).ToArray(); //recording new X coordinate that must be re-evaluated for spaces next to
-//            i = -1;
-//            k++;
-//        }
-//        else if (tempFrankX[i] - k >= 0 && image[tempFrankY[i]][tempFrankX[i] - k] == ' ')
-//            //making sure array is in-bounds and replacing space to left of Frank with 'F'
-//        {
-//            image[tempFrankY[i]][tempFrankX[i] - k] = 'F';
-//            tempFrankY = tempFrankY.Append(f1).ToArray(); //recording new Y coordinate that must be re-evaluated for spaces next to
-//            tempFrankX = tempFrankX.Append(f2 - k).ToArray(); //recording new X coordinate that must be re-evaluated for spaces next to
-//            i = -1;
-//            k++;
-//        }
-//        else if (tempFrankY[i] + k < image.Length && image[tempFrankY[i] + k][tempFrankX[i]] == ' ')
-//            //making sure array is in-bounds and replacing space below Frank with 'F'
-//        {
-//            image[tempFrankX[i] + 1][tempFrankY[i]] = 'F';
-//            tempFrankX = tempFrankX.Append(f1 + k).ToArray(); //recording new X coordinate that must be re-evaluated for spaces next to
-//            tempFrankY = tempFrankY.Append(f2).ToArray(); //recording new Y coordinate that must be re-evaluated for spaces next to
-//            i = -1;
-//            k++;
-//        }
-//        else if (tempFrankY[i] - k < image.Length && image[tempFrankY[i] - k][tempFrankX[i]] == ' ') 
-//            //making sure array is in-bounds and replacing space above Frank with 'F'
-//        {
-//            image[tempFrankX[i] - k][tempFrankY[i]] = 'F';
-//            tempFrankX = tempFrankX.Append(f1 - k).ToArray(); //recording new X coordinate that must be re-evaluated for spaces next to
-//            tempFrankY = tempFrankY.Append(f2).ToArray(); //recording new Y coordinate that must be re-evaluated for spaces next to
-//            i = -1;
-//            k++;
-//        }
-//    }
-
-//Add code for if F is next to 'X', then Frank is dead
-
-//Now do the same with Sam and Tom
-
-
-//while (breakLoop == false)
+//for (i = 0; i < image.Length; i++)
 //{
-//    if (up + 1 < image.Length && image[up + 1][f2] == 'x' || // making sure array is in-bounds. If x is next to up, dn, right, or left...
-//        dn - 1 >= 0 && image[dn - 1][f2] == 'x' ||           // water has reached Frank.
-//        right + 1 < image[f1].Length && image[f1][right + 1] == 'x' ||
-//        left - 1 >= 0 && image[f1][left - 1] == 'x')
+//    for (j = 0; j < image[i].Length; j++)
 //    {
-//        survivors = "";
-//        breakLoop = true;
+//        if (image[i][j] == 'F') //find coordinates of Frank
+//        {
+//            f1 = i;
+//            f2 = j;
+//        }
+//        else if (image[i][j] == 'S') //Find coordniates of Sam
+//        {
+//            s1 = i;
+//            s2 = j;
+//        }
+//        else if (image[i][j] == 'T') //Find coordinates of Tom
+//        {
+//            t1 = i;
+//            t2 = j;
+//        }
+//        else if (image[i][j] == 'x') //Find coordinates of each hit
+//        {
+//             if (i < seaLevel) //Sea level case. Hit is voided.
+//            {
+//                image[i][j] = 'D';
+//            }
+//            else if (image[i + 1][j] != '~' && image[i - 1][j] != '~' && image[i][j + 1] != '~' && image[i][j - 1] != '~')
+//                //Voiding hits that do not touch water (as per instructions)
+//            {
+//                image[i][j] = ' ';
+//            }
+//            else if (image[i + 1][j] == '~' || image[i - 1][j] == '~'|| image[i][j + 1] == '~' || image[i][j - 1] == '~' )
+//            {
+//                yCoordHitArray = yCoordHitArray.Append(i).ToArray(); //adds y coordinate of hit touching water. LINQ Append() Method: https://code-maze.com/add-values-to-csharp-array/
+//                xCoordHitArray = xCoordHitArray.Append(j).ToArray(); //adds x coordinate of hit touching water
+//                hitExists = true;
+//            }
+//        }
 //    }
-//    else if (up + 1 < image.Length && image[up + 1][f2] == ' ') //making sure array is in-bounds and replacing space with 'x'
+
+//}
+
+//xCoordHitArray = xCoordHitArray.Skip(1).ToArray(); //removes initial 0 entry at index 0.
+//yCoordHitArray = yCoordHitArray.Skip(1).ToArray(); //removes initial 0 entry at index 0.
+
+//i = 0; //reset counter i to zero for loop below
+//j = 0; //reset counter j to zero for loop below
+
+//image[f1][f2] = ' '; //Setting Frank position to blank. Since we already have coordinates, does not need to remain there.
+//image[s1][s2] = ' '; //Setting Frank position to blank.
+//image[t1][t2] = ' '; //Setting Frank position to blank.
+
+
+//if (hitExists == false)
+//{
+//    survivors = "";
+//}
+//else
+//{
+//    for (i = 0; i < xCoordHitArray.Length; i++)
 //    {
-//        tempFrankX = tempFrankX.Append(up + 1).ToArray();
-//        up++;
+//        //Check if coordinate below hit is blank space
+//        if (image[yCoordHitArray[i] + 1][xCoordHitArray[j]] == ' ')
+//        {
+//            image[yCoordHitArray[i] + 1][xCoordHitArray[j]] = '~';
+//            yCoordHitArray = yCoordHitArray.Append(yCoordHitArray[i] + 1).ToArray();
+//            xCoordHitArray = xCoordHitArray.Append(xCoordHitArray[j]).ToArray();
+//            i--;
+//        }
+//        //check if coordinate above hit is blank space
+//        else if (image[yCoordHitArray[i] - 1][xCoordHitArray[j]] == ' ')
+//        {
+//            image[yCoordHitArray[i] - 1][xCoordHitArray[j]] = '~';
+//            yCoordHitArray = yCoordHitArray.Append(yCoordHitArray[i] - 1).ToArray();
+//            xCoordHitArray = xCoordHitArray.Append(xCoordHitArray[j]).ToArray();
+//            i--;
+//        }
+//        //check if coordinate to the right of the hit is blank space
+//        else if (image[yCoordHitArray[i]][xCoordHitArray[j] + 1] == ' ')
+//        {
+//            image[yCoordHitArray[i]][xCoordHitArray[j] + 1] = '~';
+//            yCoordHitArray = yCoordHitArray.Append(yCoordHitArray[i]).ToArray();
+//            xCoordHitArray = xCoordHitArray.Append(xCoordHitArray[j] + 1).ToArray();
+//            i--;
+//        }
+//        //check if coordinate to the left of the hit is blank space
+//        else if (image[yCoordHitArray[i]][xCoordHitArray[j] - 1] == ' ')
+//        {
+//            image[yCoordHitArray[i]][xCoordHitArray[j] - 1] = '~';
+//            yCoordHitArray = yCoordHitArray.Append(yCoordHitArray[i]).ToArray();
+//            xCoordHitArray = xCoordHitArray.Append(xCoordHitArray[j] - 1).ToArray();
+//            i--;
+//        }
+//        else
+//        {
+//            j++;
+//        }
 //    }
-//    else if (dn - 1 >= 0 && image[dn - 1][f2] == ' ') //making sure array is in-bounds and replacing space with 'x'
+//}
+
+//// At this point, we have filled out all areas where water can leak in from hits that were originally touching water
+
+//bool frankSurvived = true;
+//bool samSurvived = true;
+//bool tomSurvived = true;
+
+//for (i = 0; i < yCoordHitArray.Length; i++)
+//{
+//    if (f1 == yCoordHitArray[i] && f2 == xCoordHitArray[i]) //check if location of Frank was now under water
 //    {
-//        dn--;
+//        frankSurvived = false; ;
 //    }
-//    else if (right + 1 < image[f1].Length && image[f1][right + 1] == ' ') //making sure array is in-bounds and replacing space with 'x'
+//    else if (s1 == yCoordHitArray[i] && s2 == xCoordHitArray[i]) //check if location of Sam was now under water
 //    {
-//        right++;
+//        samSurvived = false;
 //    }
-//    else if (left - 1 >= 0 && image[f1][left - 1] == ' ') //making sure array is in-bounds and replacing space with 'x'
+//    else if (t1 == yCoordHitArray[i] && t2 == xCoordHitArray[i]) //check if location of Tom was now under water
 //    {
-//        left--;
+//        tomSurvived = false;
+//    }
+
+//}
+
+//if (frankSurvived == true)
+//{
+//    survivors += "Frank";
+//}
+//if (samSurvived == true)
+//{
+//    if (survivors == "")
+//    {
+//        survivors = "Sam";
 //    }
 //    else
 //    {
-//        survivors = survivors + "Frank";
-//        breakLoop = true;
+//        survivors += " Sam";
 //    }
 //}
-//}
-
-
+//if (tomSurvived == true)
 //{
-//    while (i < xHitCounter)
+//    if (survivors == "")
 //    {
-//        if (xCoordArray[i] + 1 <= image.Length && image[xCoordArray[i] + 1][j] == ' ')
-//        {
-//            image[xCoordArray[i] + 1][j] = 'x';
-//        }
-//        else if (xCoordArray[i] - 1 >= 0 && image[xCoordArray[i] - 1][j] == ' ')
-//        {
-//            image[xCoordArray[i] + 1][j] = 'x';
-//        }
-//        else if (yCoordArray[i] + 1 <= image[yCoordArray[i]].Length && image[i][yCoordArray[i] + 1] == ' ')
-//        {
-//            image[i][yCoordArray[i] + 1] = ' ';
-//        }
-//        else if (yCoordArray[i] - 1 >= 0 && image[i][yCoordArray[i] - 1] == ' ')
-//        {
-//            image[i][yCoordArray[i] - 1] = ' ';
-//        }
-//        else
-
-//        i++;
+//        survivors = "Tom";
+//    }
+//    else
+//    {
+//        survivors += " Tom";
 //    }
 //}
+
+//Console.WriteLine(survivors);
+//return survivors;
 
 
 //-----------------------------------------------------------------------------------------------------------------------------
