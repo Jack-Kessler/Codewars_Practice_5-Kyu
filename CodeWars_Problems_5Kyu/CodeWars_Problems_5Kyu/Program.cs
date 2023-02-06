@@ -319,8 +319,91 @@
 //    Console.WriteLine(aArray[n]);
 //    //return aArray[n];
 //}
+
 //-----------------------------------------------------------------------------------------------------------------------------
 
+//RGB To Hex Conversion (Completed 2/6/2023 - 15th day since start of bootcamp)
+
+//int r = 212;
+//int g = 53;
+//int b = 12;
+
+//int[] temp = {r, g, b};
+
+//for (int i = 0; i < temp.Length; i++)
+//{
+//    if (temp[i] < 0)
+//    {
+//        temp[i] = 0;
+//    }
+//    else if (temp[i] > 255)
+//    {
+//        temp[i] = 255;
+//    }
+//}
+
+//r = temp[0];
+//g = temp[1];
+//b = temp[2];
+
+//const int sixteen = 16;
+
+//int[] intArray = { r / sixteen, r % sixteen, g / sixteen, g % sixteen, b / sixteen, b % sixteen };
+
+//char final = ' ';
+
+//string result = "";
+
+//for (int i = 0; i < intArray.Length; i++)
+//{
+//    if (intArray[i] >= 0 && intArray[i] <= 9)
+//    {
+//        result += $"{intArray[i]}";
+//    }
+//    else if (intArray[i] == 10)
+//    {
+//        final = 'A';
+//        result += $"{final}";
+//    }
+//    else if (intArray[i] == 11)
+//    {
+//        final = 'B';
+//        result += $"{final}";
+//    }
+//    else if (intArray[i] == 12)
+//    {
+//        final = 'C';
+//        result += $"{final}";
+//    }
+//    else if (intArray[i] == 13)
+//    {
+//        final = 'D';
+//        result += $"{final}";
+//    }
+//    else if (intArray[i] == 14)
+//    {
+//        final = 'E';
+//        result += $"{final}";
+//    }
+//    else if (intArray[i] == 15)
+//    {
+//        final = 'F';
+//        result += $"{final}";
+//    }
+//    else
+//    {
+//        final = '?';
+//        result += $"{final}";
+//    }
+//}
+
+//Console.WriteLine(result);
+
+//return result;
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------
 // ROT13 (5-Kyu) (Completed 2/5/2023 - 14th day since start of bootcamp)
 //
 //string sample = "EBG13 rknzcyr.";
