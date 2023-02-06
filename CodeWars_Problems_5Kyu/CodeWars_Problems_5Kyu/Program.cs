@@ -320,3 +320,50 @@
 //    //return aArray[n];
 //}
 //-----------------------------------------------------------------------------------------------------------------------------
+
+// ROT13 (5-Kyu) (Completed 2/5/2023 - 14th day since start of bootcamp)
+//
+//string sample = "EBG13 rknzcyr.";
+//int charNumber = 0;
+
+//char[] charArray = sample.ToCharArray();
+//char[] resultArray = new char[sample.Length];
+
+//for (int i = 0;i < charArray.Length; i++)
+//{
+//    charNumber = (int)charArray[i]; //initilaizes number associated with letter at charArray[i]
+//                                    //(Note it does not matter what number letters actually are)
+//    if (charNumber >= 'a' && charNumber <= 'm')
+//    {
+//        charNumber += 13;
+//        resultArray[i] = (char)charNumber;
+//    }
+//    else if (charNumber >= 'n' && charNumber <= 'z')
+//    {
+//        charNumber -= 13;
+//        resultArray[i] = (char)charNumber;
+//    }
+//    else if (charNumber >= 'A' && charNumber <= 'M')
+//    {
+//        charNumber += 13;
+//        resultArray[i] = (char)charNumber;
+//    }
+//    else if (charNumber >= 'N' && charNumber <= 'Z')
+//    {
+//        charNumber -= 13;
+//        resultArray[i] = (char)charNumber;
+//    }
+//    else
+//    {
+//        resultArray[i] = (char)charNumber;
+//    }
+//}
+
+//string result = new string(resultArray);
+
+//Console.WriteLine(result);
+
+
+//return result;
+
+//-----------------------------------------------------------------------------------------------------------------------------
